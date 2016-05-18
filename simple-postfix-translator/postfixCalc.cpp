@@ -61,33 +61,34 @@ void match(token t){
     }
 }
 
-void term(){
+int term(){
     if (lookahead.type == NUMBER){
+        int v = lookahead.value;
         printf("%d ", lookahead.value);
         match(lookahead);
+        return v;
     }else{
         printf("\n*** Syntax Error! '%c' it's not a number. ***\n", lookahead.value);
         exit(0);
     }
 }
 
-void expr(){
-    term();
+int expr(){
+    int v;
+    int t = term();
     while(true){
         if (lookahead.type == SYMBOL){
             if (lookahead.value == '+'){
-                match(lookahead); int t2 = 
-                term(); 
-                printf("+ ");
+                match(lookahead); int t2 = term(); printf("+ ");
+                v = t + t2;
             }else if (lookahead.value == '-'){
-                match(lookahead); 
-                term(); 
-                printf("- ");
+                match(lookahead); int t2 = term(); printf("- ");
+                v = t - t2;
             }else{
-                return;
+                return v;
             }
         }else{
-            return;
+            return v;
         }
     }
 }
@@ -97,8 +98,11 @@ int main(){
     getline(cin, input);
 
     printf("Postfix:");
+
     lookahead = scan();
-		expr();
+    int x = expr();
+
     printf("\n");
+    printf("Result: %d\n", x);
     return 0;
 }
