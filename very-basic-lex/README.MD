@@ -1,13 +1,13 @@
 Visão Geral
 ----------------------
 Um compilador ou interpretador para uma linguagem de programação geralmente é decomposto em duas tarefas:
-1 - Ler o código fonte e descobrir sua estrutura
-2 - Processar esta estrutura, por exemplo, gerando o programa alvo.
++ 1 - Ler o código fonte e descobrir sua estrutura
++ 2 - Processar esta estrutura, por exemplo, gerando o programa alvo.
 
 As ferramentas Lex e Yacc geram fragmentos de programas para resolver a primeira tarefa.
 
 A tarefa de descobrir a estrutura do código fonte também é decomposta em duas sub-tarefas:
-+ 1 - Análise Léxica - Separar o código fonte em tokens (Lex) <br/>
++ 1 - Análise Léxica - Separar o código fonte em tokens (Lex)
 + 2 - Análise Sintática - Encontrar a estrutura hierárquica do programa por meio da sintaxe (Yacc)
 
 Para mais informações, visite: http://dinosaur.compilertools.net/
