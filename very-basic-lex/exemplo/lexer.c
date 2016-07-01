@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "tokens.h"
 
 extern int yylex();
@@ -6,15 +7,23 @@ extern int relop_att;
 extern int nline;
 extern char* yytext;
 
-int main() 
+int main()
 {
-	int ntoken, cline;
-	cline = nline;
+	int ntoken;
+   char* d = (char*) malloc(2);
 	ntoken = yylex();
-	while(ntoken) {		
+	while(ntoken) {
 		switch(ntoken){
 			case RELOP:
-				printf("<RELOP,%d>", relop_att);
+            switch (relop_att) {
+               case LT: d = "LT"; break;
+               case LE: d = "LE"; break;
+               case EQ: d = "EQ"; break;
+               case NE: d = "NE"; break;
+               case GT: d = "GT"; break;
+               case GE: d = "GE"; break;
+            }
+				printf("<RELOP,%s>", d );
 				break;
 			case IF:
 				printf("<IF>");
@@ -31,7 +40,14 @@ int main()
 			case ID:
 				printf("<ID,%s>", yytext);
 				break;
+         case OP:
+   				printf("<OP>");
+   				break;
+         case CL:
+               printf("<CL>");
+               break;
 		}
+      printf("\n");
 		ntoken = yylex();
 	}
 	printf("\n EOF - Lines: %d\n", nline);

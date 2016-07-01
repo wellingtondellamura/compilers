@@ -2,7 +2,7 @@
 %%
 
 [a-zA-Z][_a-zA-Z]*	printf("TEXTO");
-[1-9][0-9]*				printf("NÚMERO");
+[0-9][0-9]*				printf("NÚMERO");
 
 %%
 

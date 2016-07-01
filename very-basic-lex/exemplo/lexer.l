@@ -9,6 +9,8 @@ int nline = 1;
 "else"						return ELSE;
 [a-zA-Z][a-zA-Z0-9_]*	return ID;
 [0-9][0-9]*					return NUMBER;
+"("							return OP;
+")"							return CL;
 "<" 							{relop_att = LT; return RELOP;}
 "<="							{relop_att = LE; return RELOP;}
 "="							{relop_att = EQ; return RELOP;}

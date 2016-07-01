@@ -4,10 +4,12 @@
 #define ID 		 4
 #define NUMBER	 5
 #define RELOP	10
+#define OP      11
+#define CL      12
 
-#define LT		11
-#define LE		12
-#define EQ		13
-#define NE		14
-#define GT		15
-#define GE		16
+#define LT		101
+#define LE		102
+#define EQ		103
+#define NE		104
+#define GT		105
+#define GE		106
