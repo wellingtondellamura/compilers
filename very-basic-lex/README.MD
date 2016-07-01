@@ -22,6 +22,8 @@ sudo apt-get install build-essential
 + 2 - Instalar a ferramenta Flex (Implementação atual do Lex)<br/>
 sudo apt-get install flex
 
+Para a instalação no Windows baixe o arquivo binário em http://gnuwin32.sourceforge.net/packages/flex.htm
+
 Como utilizar o Lex
 ----------------------
 Todos os arquivos do Lex devem ter a extensão "l", por isso, um arquivo qualquer pode se chamar "file.l".
