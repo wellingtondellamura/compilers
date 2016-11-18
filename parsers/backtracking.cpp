@@ -30,7 +30,7 @@ int main(int argc, char** argv){
             printf("error: there are still entries to process. %s \n", input.substr(token_pos).c_str());
         }
     } else {
-        printf("error: it's impossible to derive S.\n");
+        printf("error: it's impossible to derive S in position %d.\n", token_pos);
     }
     return 0;
 }
@@ -41,17 +41,17 @@ char next_token(){
     if (token_pos <= (int) input.size()-1){
         t = input[token_pos];
     }
-    printf("next_token() = %c\n", t);
+    //printf("next_token() = %c\n", t);
     return t;
 }
 
 bool S(){
     if (token == 'a'){
-        printf("S-> a\n");
+        //printf("S-> a\n");
         token = next_token();
         return true;
     } else if (token == '['){
-        printf("S-> [L]\n");
+        //printf("S-> [L]\n");
         token = next_token();
         if (L()){
             if (token == ']'){
@@ -72,13 +72,13 @@ bool S(){
 bool L(){
     marker();
     if (S()){
-        printf("L-> S;L\n");
+        //printf("L-> S;L\n");
         if (token == ';'){
             token = next_token();
             return L();
         } else {
             backtrack();
-            printf("L-> S\n");
+            //printf("L-> S\n");
             return S();
         }
     } else {
@@ -87,18 +87,18 @@ bool L(){
 }
 
 void marker(){
-    printf("Marker in %d\n", token_pos);
+    //printf("Marker in %d\n", token_pos);
     markers.push(token_pos);
 }
 
 void backtrack(){
-    printf("Backtrack\n");
+    //printf("Backtrack\n");
     if (markers.empty()){
         printf("Error -> no positions to return.");
     }else{
         token_pos = markers.top();
         markers.pop();
         token = input[token_pos];
-        printf("returning to position %d\n", token_pos);
+        //printf("returning to position %d\n", token_pos);
     }
 }
