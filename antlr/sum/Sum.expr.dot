@@ -1,0 +1,25 @@
+digraph ATN {
+rankdir=LR;
+s3[fontsize=11, label="3", shape=doublecircle, fixedsize=true, width=.6];
+s16[fontsize=11,label="16", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s17[fontsize=11,label="{&rarr;\n17\nd=0|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s2[fontsize=11,label="2", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s18[fontsize=11,label="&larr;\n18", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s10[fontsize=11,label="10", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s11[fontsize=11,label="11", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s12[fontsize=11,label="12", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s13[fontsize=11,label="13", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s14[fontsize=11,label="14", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s15[fontsize=11,label="15", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s2 -> s17 [fontname="Times-Italic", label="&epsilon;"];
+s17:p0 -> s10 [fontname="Times-Italic", label="&epsilon;"];
+s17:p1 -> s12 [fontname="Times-Italic", label="&epsilon;"];
+s10 -> s11 [fontsize=11, fontname="Courier", arrowsize=.7, label = "NUM", arrowhead = normal];
+s12 -> s13 [fontsize=11, fontname="Courier", arrowsize=.7, label = "NUM", arrowhead = normal];
+s11 -> s18 [fontsize=11, fontname="Courier", arrowsize=.7, label = "action_1:-1", arrowhead = normal];
+s13 -> s14 [fontsize=11, fontname="Courier", arrowsize=.7, label = "PLUS", arrowhead = normal];
+s18 -> s3 [fontname="Times-Italic", label="&epsilon;"];
+s14 -> s15 [fontsize=11, fontname="Courier", arrowsize=.7, label = "<expr>", arrowhead = normal];
+s15 -> s16 [fontsize=11, fontname="Courier", arrowsize=.7, label = "action_1:-1", arrowhead = normal];
+s16 -> s18 [fontname="Times-Italic", label="&epsilon;"];
+}

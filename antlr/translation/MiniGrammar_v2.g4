@@ -1,4 +1,4 @@
-grammar MiniGrammar;
+grammar MiniGrammar_v2;
 
 init : expr             {System.out.println($expr.value);};
 

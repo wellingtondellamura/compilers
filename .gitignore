@@ -26,3 +26,6 @@
 *.exe
 *.out
 *.app
+/antlr/examples/Test1/nbproject/private/
+/antlr/examples/Test1/build/
+/antlr/examples/Test1/dist/
