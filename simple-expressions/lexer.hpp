@@ -10,6 +10,7 @@ int line = 0;
 char peek = ' ';
 string input;
 int input_pos = -1;
+int char_pos = -1;
 
 struct Token{
   int type;
@@ -23,6 +24,7 @@ string read_all_lines(string);
 
 char next_char(){
   input_pos++;
+  char_pos++;
   char c = '\0';
   if (input_pos < input.length())
     c = input[input_pos];
@@ -37,8 +39,10 @@ Token next_token(){
 
   do {
     if (peek == ' ' || peek == '\t') continue;
-    else if (peek == '\n') line++;
-    else break;
+    else if (peek == '\n') {
+      line++;
+      char_pos = -1;
+    } else break;
   } while (peek = next_char());
 
   if (peek == '$'){

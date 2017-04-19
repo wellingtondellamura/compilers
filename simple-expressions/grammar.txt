@@ -37,3 +37,14 @@ equals =     <eq>
 var Texto    <var, atr>
 num Número   <num, 10>
 print print  <print>
+
+
+Eliminar a ambiguidade do First
+PRG -> CMD PR2
+PR2 -> eol PRG |
+CMD -> EXP | ATR | OUT
+EXP -> num RST
+RST ->  + EXP |
+ATR -> var = VAL
+OUT -> print VAL
+VAL -> var | EXP
