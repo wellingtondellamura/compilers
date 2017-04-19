@@ -37,8 +37,9 @@ void prg(){
 //PR2 -> eol PRG | vazio
 void pr2(){
   cout << "pr2" << endl;
-  if (lookahead.type == EOL)
+  if (lookahead.type == EOL){
     match(EOL); prg();
+  }
 }
 //CMD -> EXP | ATR | OUT
 void cmd(){
