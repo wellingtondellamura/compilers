@@ -1,0 +1,41 @@
+Gramática Original
+
+PRG -> CMD eol | CMD eol PRG
+CMD -> EXP | ATR | OUT
+EXP -> EXP + EXP | num
+ATR -> var = num | var = EXP | var = var
+OUT -> print var | print num
+
+Remoção da Recursão à esquerda
+PRG -> CMD eol | CMD eol PRG
+CMD -> EXP | ATR | OUT
+EXP -> num + EXP | num
+ATR -> var = num | var = EXP | var = var
+OUT -> print var | print num
+
+Fatoração à esquerda
+PRG -> CMD eol[] | CMD eol [PRG]
+CMD -> EXP | ATR | OUT
+EXP -> num[ + EXP] | num []
+ATR -> var = [num] | var = [EXP]
+OUT -> print [var] | print [num]
+
+Gramática Fatorada
+PRG -> CMD PR2
+PR2 -> eol PRG | 
+CMD -> EXP | ATR | OUT
+EXP -> num RST
+RST ->  + EXP | 
+ATR -> var = VAL
+OUT -> print VAL
+VAL -> var | num | EXP
+
+Tokens
+eol ;        <eol>
+plus +       <pl>
+equals =     <eq>
+var Texto    <var, atr>
+num Número   <num, 10>
+print print  <print>
+
+
