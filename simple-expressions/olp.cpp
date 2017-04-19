@@ -14,36 +14,41 @@ void match(int);
 void prg();
 void pr2();
 void cmd();
-void exp();
-void rst();
+int exp();
+int rst();
 void atr();
 void out();
-void val();
+int val();
+
+void error(string msg){
+  cout << "syntax error on " << line << ":" << char_pos << endl;
+  cout << msg << endl;
+}
 
 void match(int type){
   if (lookahead.type == type){
-    cout << "match " << type << endl;
+    //cout << "match " << type << endl;
     lookahead = next_token();
   } else {
-    cout << "syntax error on " << line << ":" << char_pos << endl;
+    error("not match");
   }
 }
 
 //PRG -> CMD PR2
 void prg(){
-  cout << "prg" << endl;
-  cmd();pr2();
+  //cout << "prg" << endl;
+  cmd(); pr2();
 }
 //PR2 -> eol PRG | vazio
 void pr2(){
-  cout << "pr2" << endl;
+  //cout << "pr2" << endl;
   if (lookahead.type == EOL){
     match(EOL); prg();
   }
 }
 //CMD -> EXP | ATR | OUT
 void cmd(){
-  cout << "cmd" << endl;
+  //cout << "cmd" << endl;
   if (lookahead.type == NUM)
       exp();
   if (lookahead.type == VAR)
@@ -52,38 +57,52 @@ void cmd(){
       out();
 }
 //EXP -> num RST
-void exp(){
-  cout << "exp" << endl;
-  match(NUM); rst();
+int exp(){
+  //cout << "exp" << endl;
+  if (lookahead.type == NUM){
+    int x = lookahead.value;
+    match(NUM);
+    int y = rst();
+    return x + y;
+  }
+  return 0;
 }
 //RST ->  + EXP |
-void rst(){
-  cout << "rst" << endl;
+int rst(){
+  //cout << "rst" << endl;
   if (lookahead.type == PLUS){
-      match(PLUS); exp();
+      match(PLUS);
+      return exp();
   }
+  return 0;
 }
 //ATR -> var = VAL
 void atr(){
-  cout << "atr" << endl;
+  //cout << "atr" << endl;
   if (lookahead.type == VAR){
       match(VAR); match(EQUALS); val();
   }
 }
 //OUT -> print VAL
 void out(){
-  cout << "out" << endl;
+  //cout << "out" << endl;
   if (lookahead.type == PRINT){
-      match(PRINT); val();
+      match(PRINT);
+      int x = val();
+      cout << x << endl;
   }
 }
 //VAL -> var | EXP
-void val(){
-  cout << "val" << endl;
+int val(){
+  //cout << "val" << endl;
   if (lookahead.type == VAR){
     match(VAR);
+    return 0;
   } else if (lookahead.type == NUM){
-    exp();
+    return exp();
+  } else {
+      error("VAR or NUM expected");
+      return -1;
   }
 }
 
@@ -94,7 +113,7 @@ int main(int argc, char** argv){
     cout << "error on read source file" << endl;
     return 1;
   }
-  cout  << input << endl;
+  //cout  << input << endl;
   lookahead = next_token();
   prg();
   // while (lookahead.type != -1){
