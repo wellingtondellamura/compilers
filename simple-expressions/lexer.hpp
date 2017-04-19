@@ -2,6 +2,8 @@
 #define LEXER_HPP
 
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
 int line = 0;
@@ -17,7 +19,7 @@ struct Token{
 char next_char();
 Token next_token();
 void print_token(Token);
-
+string read_all_lines(string);
 
 char next_char(){
   input_pos++;
@@ -120,6 +122,19 @@ void print_token(Token t){
       break;
     }
   }
+}
+
+string read_all_lines(string filename){
+  string all_lines = "";
+  fstream file;
+  string line;
+  file.open(filename.c_str(), ios::in);
+  while (file.good()) {
+    getline(file, line);
+    all_lines += line + '\n';
+  }
+  file.close();
+  return all_lines;
 }
 
 #endif

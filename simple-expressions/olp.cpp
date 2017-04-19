@@ -11,10 +11,13 @@ using namespace std;
 Token lookahead;
 
 int main(int argc, char** argv){
-  //if (argc > 1){
-  //  input = argv[1];
-  //}
-  input = "$x = 10; $y = 20 + $x";
+  if (argc > 1){
+    input = read_all_lines(argv[1]);
+  } else {
+    cout << "error on read source file" << endl;
+    return 1;
+  }
+  
   lookahead = next_token();
   while (lookahead.type != -1){
     print_token(lookahead);

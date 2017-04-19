@@ -37,7 +37,6 @@ Symbol get_symbol(int id){
   return symbol_null;
 }
 
-
 void print_symbol_table(){
   for (int i = 0; i < symbols.size(); i++){
     Symbol s = symbols[i];
