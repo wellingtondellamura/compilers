@@ -42,7 +42,7 @@ void pr2(){
   //cout << "pr2" << endl;
   if (lookahead.type == EOL){
     match(EOL); prg();
-  } else {
+} else if (lookahead.type!=EOF){
     error("EOL expected");
   }
 }
@@ -55,7 +55,7 @@ void cmd(){
       atr();
   } else if (lookahead.type == PRINT){
       out();
-  } else {
+  } else if (lookahead.type != EOF) {
       error("Unrecongnized Command");
   }
 }
@@ -83,7 +83,15 @@ int rst(){
 void atr(){
   //cout << "atr" << endl;
   if (lookahead.type == VAR){
-      match(VAR); match(EQUALS); val();
+      int v = lookahead.value;
+      match(VAR);
+      match(EQUALS);
+      int x = val();
+      if (!update_symbol(v, x)){
+          error("Impossible assign value");
+      }
+  } else {
+      error("VAR expected");
   }
 }
 //OUT -> print VAL
@@ -97,9 +105,15 @@ void out(){
 }
 //VAL -> var | EXP
 int val(){
-  //cout << "val" << endl;
   if (lookahead.type == VAR){
+    Token v = lookahead;
     match(VAR);
+    Symbol s = get_symbol(v.value);
+    if (s.token != ERR){
+        return s.value;
+    } else {
+        error("VAR not found");
+    }
     return 0;
   } else if (lookahead.type == NUM){
     return exp();
@@ -125,7 +139,7 @@ int main(int argc, char** argv){
   // }
   // cout << endl << endl;
   //
-  // print_symbol_table();
+  print_symbol_table();
   // cout << endl;
   return 0;
 }
