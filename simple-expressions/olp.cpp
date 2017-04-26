@@ -27,7 +27,6 @@ void error(string msg){
 
 void match(int type){
   if (lookahead.type == type){
-    //cout << "match " << type << endl;
     lookahead = next_token();
   } else {
     error("not match");
@@ -36,7 +35,6 @@ void match(int type){
 
 //PRG -> CMD PR2
 void prg(){
-  //cout << "prg" << endl;
   cmd(); pr2();
 }
 //PR2 -> eol PRG | vazio
@@ -44,17 +42,22 @@ void pr2(){
   //cout << "pr2" << endl;
   if (lookahead.type == EOL){
     match(EOL); prg();
+  } else {
+    error("EOL expected");
   }
 }
 //CMD -> EXP | ATR | OUT
 void cmd(){
   //cout << "cmd" << endl;
-  if (lookahead.type == NUM)
+  if (lookahead.type == NUM){
       exp();
-  if (lookahead.type == VAR)
+  } else if (lookahead.type == VAR){
       atr();
-  if (lookahead.type == PRINT)
+  } else if (lookahead.type == PRINT){
       out();
+  } else {
+      error("Unrecongnized Command");
+  }
 }
 //EXP -> num RST
 int exp(){
@@ -113,7 +116,6 @@ int main(int argc, char** argv){
     cout << "error on read source file" << endl;
     return 1;
   }
-  //cout  << input << endl;
   lookahead = next_token();
   prg();
   // while (lookahead.type != -1){

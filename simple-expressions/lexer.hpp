@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int line = 0;
+int line = 1;
 char peek = ' ';
 string input;
 int input_pos = -1;
