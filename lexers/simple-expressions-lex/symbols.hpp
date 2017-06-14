@@ -12,7 +12,7 @@ struct Symbol{
     int value;
     string lexem;
 };
-vector<Symbol> symbols;
+std::vector<Symbol> symbols;
 
 int add_symbol(Symbol);
 void print_symbol_table();

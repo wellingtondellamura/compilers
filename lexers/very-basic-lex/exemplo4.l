@@ -4,7 +4,7 @@
 %%
 \n         { nline++; nchar++; }
 [^ \t\n]+  { nword++; nchar += yyleng; }
-.          { nchar++; }
+.           nchar++;
 %%
 int main(void) {
     yylex();
