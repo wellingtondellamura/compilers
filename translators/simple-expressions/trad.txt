@@ -1,0 +1,33 @@
+OLP           C
+2+2;          printf("%d\n",2+2);
+$x=2+2;       int x = 2+2;
+$x=$x+10;     x = x+10;
+print $x;     printf("%d\n",x);
+
+
+#include <stdio.h>
+int main(){
+  //código
+  return 0;
+}
+
+begin(){
+"#include <stdio.h>
+int main(){"
+}
+
+end (){
+"
+return 0;
+}
+"
+}
+
+PRG -> {begin}();} CMD PR2 {end();}
+PR2 -> eol PRG |
+CMD -> EXP | ATR | OUT
+EXP -> num RST
+RST ->  + EXP |
+ATR -> var = VAL
+OUT -> print VAL
+VAL -> var | EXP
