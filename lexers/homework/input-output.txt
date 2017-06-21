@@ -1,0 +1,14 @@
+Input:
+   insert into alunos (id, nome, telefone)
+   values (1, 'Joãozinho','7836821');
+
+Output:
+   <insert> <into> <id,#1> <open> <id,#2> <sep> <id, #3> <sep> <id, #4> <close> <values> <open> <num, 1> <sep> <str, #5> <sep> <str, #6> <close> <eol>
+
+Symbols
+#1 | alunos      | id
+#2 | id          | id
+#3 | nome        | id
+#4 | telefone    | id
+#5 | 'Joãozinho' | str
+#6 | '7836821'   | str
