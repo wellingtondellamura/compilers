@@ -1,0 +1,19 @@
+DML
+
+dml 	::= cmd EOL dml 
+		  | cmd EOL
+cmd 	::= insert 
+		  | update 
+		  | delete 
+		  | select
+insert	::= INSERT INTO TABLE OPEN fields CLOSE VALUES OPEN values CLOSE
+fields  ::= ID
+		  | ID COMMA fields
+values  ::= ID
+		  | STRING
+		  | NUMBER
+		  | ID COMMA values
+		  | NUMBER COMMA values
+		  | STRING COMMA values
+
+
