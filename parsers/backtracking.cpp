@@ -30,7 +30,7 @@ int main(int argc, char** argv){
             printf("error: there are still entries to process. %s \n", input.substr(token_pos).c_str());
         }
     } else {
-        printf("error: it's impossible to derive S in position %d.\n", token_pos);
+        printf("error: it's impossible derive S in position %d.\n", token_pos);
     }
     return 0;
 }
