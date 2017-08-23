@@ -1,18 +1,18 @@
-progr ::= cmd EOL | cmd EOL prog
-cmd   ::=  IF expr THEN cmd 
-         | WHILE expr cmd
-         | BEGIN progr END
-         | scmd
-scmd  ::= WRITE VAR | READ VAR | VAR = expr
-expr  ::= NUM + expr | NUM - expr | NUM 
+<progr> ::= <cmd> EOL | <cmd> EOL <progr>
+<cmd>   ::=  IF <expr> THEN <cmd>
+         | WHILE <expr> cmd
+         | BEGIN <progr> END
+         | <scmd>
+<scmd>  ::= WRITE VAR | READ VAR | VAR = <expr>
+<expr>  ::= NUM + <expr> | NUM - <expr> | NUM
 
----[Ajustes na Gramática----------------
+---[Ajustes na Gramática]----------------
 
 Seja & equivalente a vazio
 
 progr ::= cmd EOL rec
-rec   ::= prog | &
-cmd   ::=  IF expr THEN cmd 
+rec   ::= progr | &
+cmd   ::=  IF expr THEN cmd
          | WHILE expr cmd
          | BEGIN progr END
          | scmd
