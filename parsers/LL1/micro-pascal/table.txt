@@ -1,0 +1,27 @@
+progr ::= cmd EOL rec
+rec   ::= progr | &
+cmd   ::=  IF expr THEN cmd
+         | WHILE expr cmd
+         | BEGIN progr END
+         | scmd
+scmd  ::= WRITE VAR | READ VAR | VAR EQ expr
+expr  ::= NUM rec2
+rec2  ::= PLUS expr | MINUS expr | &
+
+First
+--------------------------------------------------
+progr = first(cmd)
+rec   = first(progr) U first(&)
+cmd   = first(IF) U first(WHILE) U first(BEGIN) U first(scmd)
+scmd  = first(WRITE) U first(READ) U first(VAR)
+expr  = first(NUM)
+rec2  = first(PLUS) U first(MINUS) U first(&)
+--------------------------------------------------
+Follow
+--------------------------------------------------
+progr = first(END) U follow(rec)
+rec   = follow(prog)
+cmd   = first(EOL) U follow(cmd)
+scmd  = follow(cmd)
+expr  = first(THEN) U first(cmd) U follow(scmd) U follow(rec2)
+rec2  = follow(expr)
