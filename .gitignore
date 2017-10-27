@@ -41,3 +41,6 @@
 /parsers/antlr/BasicInt/nbproject/private/
 /parsers/antlr/BasicInt/build/
 /parsers/antlr/BasicInt/dist/
+/parsers/antlr/BasicIntAST/nbproject/private/
+/parsers/antlr/BasicIntAST/build/
+/parsers/antlr/BasicIntAST/dist/
