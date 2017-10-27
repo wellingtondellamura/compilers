@@ -31,13 +31,13 @@ attr    : VAR '=' expr  #attrExpr
 expr    returns [Double value]
         : expr1 '+' expr        #exprPlus
         | expr1 '-' expr        #exprMinus
-        | expr1                 #expr1
+        | expr1                 #expr1Empty
         ;
 
 expr1   returns [Double value]
         : expr2 '*' expr        #expr1Mult
         | expr2 '/' expr        #expr1Div
-        | expr2                 #expr2
+        | expr2                 #expr2Empty
         ;
 
 expr2   returns [Double value]
