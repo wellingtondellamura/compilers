@@ -5,128 +5,97 @@
  */
 package basicintast.util;
 
+import basicintast.parser.BasicBaseVisitor;
 import basicintast.parser.BasicParser;
-import basicintast.parser.BasicVisitor;
-import org.antlr.v4.runtime.tree.ErrorNode;
+import java.util.Scanner;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.RuleNode;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
  *
  * @author wellington
  */
 
-public class BasicVisitorImpl implements BasicVisitor<Double>{
-
-    @Override
-    public Double visitProgramStmt(BasicParser.ProgramStmtContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Double visitStmtPrint(BasicParser.StmtPrintContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Double visitStmtRead(BasicParser.StmtReadContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Double visitStmtAttr(BasicParser.StmtAttrContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Double visitStmtExpr(BasicParser.StmtExprContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public class BasicVisitorImpl extends BasicBaseVisitor<Double>{
 
     @Override
     public Double visitPrintStr(BasicParser.PrintStrContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(ctx.STR().getText());
+        return 0d;
     }
 
     @Override
     public Double visitPrintExpr(BasicParser.PrintExprContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double value = visit(ctx.expr()); 
+        System.out.println(value);
+        return 0d;
     }
 
     @Override
     public Double visitReadVar(BasicParser.ReadVarContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Scanner s = new Scanner(System.in);
+        Double value = s.nextDouble();
+        SymbolsTable.getInstance().addSymbol(ctx.VAR().getText(), value);
+        return value;
     }
 
     @Override
     public Double visitAttrExpr(BasicParser.AttrExprContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Double value = visit(ctx.expr());
+        SymbolsTable.getInstance().addSymbol(ctx.VAR().getText(), value);
+        return value;
     }
 
     @Override
     public Double visitExprPlus(BasicParser.ExprPlusContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Double a = visit(ctx.expr1());
+        Double b = visit(ctx.expr());
+        return a + b;
     }
 
     @Override
     public Double visitExprMinus(BasicParser.ExprMinusContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Double a = visit(ctx.expr1());
+        Double b = visit(ctx.expr());
+        return a - b;
     }
 
     @Override
     public Double visitExpr1Empty(BasicParser.Expr1EmptyContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return visit(ctx.expr1());
     }
 
     @Override
     public Double visitExpr1Mult(BasicParser.Expr1MultContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Double a = visit(ctx.expr2());
+        Double b = visit(ctx.expr());
+        return a * b;
     }
 
     @Override
     public Double visitExpr1Div(BasicParser.Expr1DivContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Double a = visit(ctx.expr2());
+        Double b = visit(ctx.expr());
+        return a / b;
     }
 
     @Override
     public Double visitExpr2Empty(BasicParser.Expr2EmptyContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return visit(ctx.expr2());
     }
 
     @Override
     public Double visitExpr2Par(BasicParser.Expr2ParContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return visit(ctx.expr());
     }
 
     @Override
     public Double visitExpr2Num(BasicParser.Expr2NumContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Double.parseDouble(ctx.NUM().getText());
     }
 
     @Override
     public Double visitExpr2Var(BasicParser.Expr2VarContext ctx) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return SymbolsTable.getInstance().getSymbol(ctx.VAR().getText());
     }
 
-    @Override
-    public Double visit(ParseTree tree) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Double visitChildren(RuleNode node) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Double visitTerminal(TerminalNode node) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Double visitErrorNode(ErrorNode node) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
