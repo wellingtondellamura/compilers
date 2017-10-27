@@ -1,1 +1,6 @@
 x=2+2;
+print x;
+y=10;
+print x+y;
+read z;
+print z;

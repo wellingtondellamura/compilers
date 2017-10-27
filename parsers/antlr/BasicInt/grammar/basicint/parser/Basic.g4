@@ -5,7 +5,7 @@ grammar Basic;
 
 @header{
 package basicint.parser;
-
+import java.util.*;
 import basicint.util.*;
 }
 
@@ -18,11 +18,15 @@ stmt    : print
         | expr
         ;
 
-print   : PRINT STR
-        | PRINT expr
+print   : PRINT STR         {System.out.println($STR.text); }
+        | PRINT expr        {System.out.println($expr.value); }
         ;
 
-read    : READ VAR
+read    : READ VAR {
+             Scanner s = new Scanner(System.in);
+             Double d = s.nextDouble();
+             SymbolsTable.getInstance().addSymbol($VAR.text,d);
+        }
         ;
 
 attr    : a=VAR '=' b=expr   {SymbolsTable.getInstance().addSymbol($a.text,$b.value);}

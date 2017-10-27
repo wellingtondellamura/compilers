@@ -32,10 +32,8 @@ public class Run {
         ANTLRInputStream input = new ANTLRFileStream("input.basic");
         BasicLexer lexer = new BasicLexer(input);
         TokenStream tokens = new BufferedTokenStream(lexer);
-        BasicParser parser = new BasicParser(tokens);
-        BasicParser.ExprContext expr = parser.expr();
-        System.out.println(expr.value);        
-        showParseTreeFrame(expr, parser);
+        BasicParser parser = new BasicParser(tokens);        
+        parser.program();        
     }
     
     private static void showParseTreeFrame(ParseTree tree, BasicParser parser) throws HeadlessException {
