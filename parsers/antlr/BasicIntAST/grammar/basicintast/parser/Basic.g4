@@ -5,59 +5,77 @@ grammar Basic;
 
 @header{
 package basicintast.parser;
-
 import basicintast.util.*;
 }
 
-program : (stmt EOL)+       #programStmt
+program : (stmt)+               #programStmt
         ;
 
-stmt    : print     #stmtPrint
-        | read      #stmtRead
-        | attr      #stmtAttr
-        | expr      #stmtExpr
+stmt    : print EOL             #stmtPrint
+        | read  EOL             #stmtRead
+        | attr  EOL             #stmtAttr
+        | expr  EOL             #stmtExpr
+        | cond                  #stmtCond
         ;
 
-print   : PRINT STR     #printStr
-        | PRINT expr    #printExpr
+cond    : IF '('condExpr')' b1=block                   #ifStmt
+        | IF '('condExpr')' b1=block ELSE b2=block     #ifElseStmt 
         ;
 
-read    : READ VAR      #readVar
+condExpr: expr                                              #condExpresion
+        | expr relop=('>'|'<'|'=='|'>='|'<='|'!=') expr     #condRelOp
         ;
 
-attr    : VAR '=' expr  #attrExpr
+block   : '{' program '}'   #blockStmt
         ;
 
-expr    returns [Double value]
-        : expr1 '+' expr        #exprPlus
-        | expr1 '-' expr        #exprMinus
-        | expr1                 #expr1Empty
+print   : PRINT STR         #printStr
+        | PRINT expr        #printExpr
         ;
 
-expr1   returns [Double value]
-        : expr2 '*' expr        #expr1Mult
-        | expr2 '/' expr        #expr1Div
-        | expr2                 #expr2Empty
+read    : READ VAR          #readVar
         ;
 
-expr2   returns [Double value]
-        : '(' expr ')'          #expr2Par
-        | NUM                   #expr2Num
-        | VAR                   #expr2Var
+attr    : VAR '=' expr      #attrExpr
+        ;
+
+expr    : expr1 '+' expr    #exprPlus
+        | expr1 '-' expr    #exprMinus
+        | expr1             #expr1Empty
+        ;
+
+expr1   : expr2 '*' expr    #expr1Mult
+        | expr2 '/' expr    #expr1Div
+        | expr2             #expr2Empty
+        ;
+
+expr2   : '(' expr ')'      #expr2Par
+        | NUM               #expr2Num
+        | VAR               #expr2Var
         ;
 
 //TOKENS
+IF      : 'if';
+ELSE    : 'else';
+GT      : '>' ;
+LT      : '<' ;
+EQ      : '==';
+GE      : '>=';
+LE      : '<=';
+NE      : '!=';
 PLUS    : '+' ;
 MINUS   : '-' ;
 MULT    : '*' ;
 DIV     : '/' ;
 OPEN    : '(' ;
 CLOSE   : ')' ;
-EQ      : '=' ;
+OPEN_BL : '{' ;
+CLOSE_BL: '}' ;
+IS      : '=' ;
 EOL     : ';' ;
 PRINT   : 'print' ;
 READ    : 'read' ;
 NUM     : [0-9]+ ;
 VAR     : [a-zA-Z][a-zA-Z0-9_]*;
-STR     : '"'[a-zA-Z0-9\t ]*'"';
+STR     : '"' ('\\' ["\\] | ~["\\\r\n])* '"';
 WS      : [\n\r \t]+ -> skip;

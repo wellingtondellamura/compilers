@@ -6,32 +6,84 @@
 package basicintast.util;
 
 import basicintast.parser.BasicBaseVisitor;
+import basicintast.parser.BasicLexer;
 import basicintast.parser.BasicParser;
 import java.util.Scanner;
-import org.antlr.v4.runtime.tree.ParseTree;
 
 /**
  *
  * @author wellington
  */
-
-public class BasicVisitorImpl extends BasicBaseVisitor<Double>{
+public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
-    public Double visitPrintStr(BasicParser.PrintStrContext ctx) {
-        System.out.println(ctx.STR().getText());
+    public Object visitIfStmt(BasicParser.IfStmtContext ctx) {
+        Boolean visit = (Boolean) visit(ctx.condExpr());
+        if (visit) {
+            return visit(ctx.b1);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitIfElseStmt(BasicParser.IfElseStmtContext ctx) {
+        Boolean visit = (Boolean) visit(ctx.condExpr());
+        if (visit) {
+            return visit(ctx.b1);
+        } else {
+            return visit(ctx.b2);
+        }
+    }
+
+    @Override
+    public Object visitBlockStmt(BasicParser.BlockStmtContext ctx) {
+        return super.visitBlockStmt(ctx);
+    }
+
+    @Override
+    public Object visitCondRelOp(BasicParser.CondRelOpContext ctx) {
+        Double a = (Double) visit(ctx.expr(0));
+        Double b = (Double) visit(ctx.expr(1));
+        int op = ctx.relop.getType();
+        switch (op) {
+            case BasicLexer.EQ:
+                return a == b;
+            case BasicLexer.NE:
+                return a != b;
+            case BasicLexer.LT:
+                return a < b;
+            case BasicLexer.GT:
+                return a > b;
+            case BasicLexer.LE:
+                return a <= b;
+            case BasicLexer.GE:
+                return a >= b;
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitCondExpresion(BasicParser.CondExpresionContext ctx) {
+        Double d = (Double) visit(ctx.expr());
+        return d > 0;
+    }
+
+    @Override
+    public Object visitPrintStr(BasicParser.PrintStrContext ctx) {
+        String val = ctx.STR().getText();
+        System.out.println(val);
         return 0d;
     }
 
     @Override
-    public Double visitPrintExpr(BasicParser.PrintExprContext ctx) {
-        double value = visit(ctx.expr()); 
-        System.out.println(value);
-        return 0d;
+    public Object visitPrintExpr(BasicParser.PrintExprContext ctx) {
+        Object o = visit(ctx.expr());
+        System.out.println(o);
+        return o;
     }
 
     @Override
-    public Double visitReadVar(BasicParser.ReadVarContext ctx) {
+    public Object visitReadVar(BasicParser.ReadVarContext ctx) {
         Scanner s = new Scanner(System.in);
         Double value = s.nextDouble();
         SymbolsTable.getInstance().addSymbol(ctx.VAR().getText(), value);
@@ -39,62 +91,62 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Double>{
     }
 
     @Override
-    public Double visitAttrExpr(BasicParser.AttrExprContext ctx) {
-        Double value = visit(ctx.expr());
+    public Object visitAttrExpr(BasicParser.AttrExprContext ctx) {
+        Double value = (Double) visit(ctx.expr());
         SymbolsTable.getInstance().addSymbol(ctx.VAR().getText(), value);
         return value;
     }
 
     @Override
-    public Double visitExprPlus(BasicParser.ExprPlusContext ctx) {
-        Double a = visit(ctx.expr1());
-        Double b = visit(ctx.expr());
+    public Object visitExprPlus(BasicParser.ExprPlusContext ctx) {
+        Double a = (Double) visit(ctx.expr1());
+        Double b = (Double) visit(ctx.expr());
         return a + b;
     }
 
     @Override
-    public Double visitExprMinus(BasicParser.ExprMinusContext ctx) {
-        Double a = visit(ctx.expr1());
-        Double b = visit(ctx.expr());
+    public Object visitExprMinus(BasicParser.ExprMinusContext ctx) {
+        Double a = (Double) visit(ctx.expr1());
+        Double b = (Double) visit(ctx.expr());
         return a - b;
     }
 
     @Override
-    public Double visitExpr1Empty(BasicParser.Expr1EmptyContext ctx) {
+    public Object visitExpr1Empty(BasicParser.Expr1EmptyContext ctx) {
         return visit(ctx.expr1());
     }
 
     @Override
-    public Double visitExpr1Mult(BasicParser.Expr1MultContext ctx) {
-        Double a = visit(ctx.expr2());
-        Double b = visit(ctx.expr());
+    public Object visitExpr1Mult(BasicParser.Expr1MultContext ctx) {
+        Double a = (Double) visit(ctx.expr2());
+        Double b = (Double) visit(ctx.expr());
         return a * b;
     }
 
     @Override
-    public Double visitExpr1Div(BasicParser.Expr1DivContext ctx) {
-        Double a = visit(ctx.expr2());
-        Double b = visit(ctx.expr());
+    public Object visitExpr1Div(BasicParser.Expr1DivContext ctx) {
+        Double a = (Double) visit(ctx.expr2());
+        Double b = (Double) visit(ctx.expr());
         return a / b;
     }
 
     @Override
-    public Double visitExpr2Empty(BasicParser.Expr2EmptyContext ctx) {
+    public Object visitExpr2Empty(BasicParser.Expr2EmptyContext ctx) {
         return visit(ctx.expr2());
     }
 
     @Override
-    public Double visitExpr2Par(BasicParser.Expr2ParContext ctx) {
+    public Object visitExpr2Par(BasicParser.Expr2ParContext ctx) {
         return visit(ctx.expr());
     }
 
     @Override
-    public Double visitExpr2Num(BasicParser.Expr2NumContext ctx) {
+    public Object visitExpr2Num(BasicParser.Expr2NumContext ctx) {
         return Double.parseDouble(ctx.NUM().getText());
     }
 
     @Override
-    public Double visitExpr2Var(BasicParser.Expr2VarContext ctx) {
+    public Object visitExpr2Var(BasicParser.Expr2VarContext ctx) {
         return SymbolsTable.getInstance().getSymbol(ctx.VAR().getText());
     }
 

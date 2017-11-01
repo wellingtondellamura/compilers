@@ -18,8 +18,8 @@ stmt    : print
         | expr
         ;
 
-print   : PRINT STR         {System.out.println($STR.text); }
-        | PRINT expr        {System.out.println($expr.value); }
+print   : PRINT STR   {System.out.println($STR.text.replace("\"","")); }
+        | PRINT expr  {System.out.println($expr.value); }
         ;
 
 read    : READ VAR {

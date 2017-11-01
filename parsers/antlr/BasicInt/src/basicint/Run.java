@@ -29,7 +29,15 @@ public class Run {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        ANTLRInputStream input = new ANTLRFileStream("input.basic");
+        String fn = "";
+        if (args.length > 0){
+            fn = args[0];
+        }else{
+            System.out.println("Usage: basic filename.basic");
+            System.exit(0);
+        }        
+        
+        ANTLRInputStream input = new ANTLRFileStream(fn);
         BasicLexer lexer = new BasicLexer(input);
         TokenStream tokens = new BufferedTokenStream(lexer);
         BasicParser parser = new BasicParser(tokens);        
