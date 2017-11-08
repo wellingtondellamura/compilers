@@ -18,8 +18,8 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitIfStmt(BasicParser.IfStmtContext ctx) {
-        Boolean visit = (Boolean) visit(ctx.condExpr());
-        if (visit) {
+        Boolean cond = (Boolean) visit(ctx.condExpr());
+        if (cond) {
             return visit(ctx.b1);
         }
         return null;
@@ -27,8 +27,9 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitIfElseStmt(BasicParser.IfElseStmtContext ctx) {
-        Boolean visit = (Boolean) visit(ctx.condExpr());
-        if (visit) {
+        Boolean cond = (Boolean) visit(ctx.condExpr());
+        
+        if (cond) {
             return visit(ctx.b1);
         } else {
             return visit(ctx.b2);
@@ -44,12 +45,13 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
     public Object visitCondRelOp(BasicParser.CondRelOpContext ctx) {
         Double a = (Double) visit(ctx.expr(0));
         Double b = (Double) visit(ctx.expr(1));
+        
         int op = ctx.relop.getType();
         switch (op) {
             case BasicLexer.EQ:
-                return a == b;
+                return a.equals(b);
             case BasicLexer.NE:
-                return a != b;
+                return !a.equals(b);
             case BasicLexer.LT:
                 return a < b;
             case BasicLexer.GT:

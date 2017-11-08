@@ -1,0 +1,61 @@
+UENP/CCT Compiladores 2017
+  -=- Trabalho Final -=-
+Data de Entrega: 29/11 e 01/12
+
+Um interpretador de Mini Pascal e um tradudor de Mini Pascall para C/C++
+
+-> Código fonte no Github
+-> Apresentação
+	- Descrição da Implementação
+	- Demonstração da linguagem
+	- Considerações sobre o trabalho
+-> Relatório (Modelo SBC) em PDF
+	- Documentação da Linguagem
+	- Descrição da Implementação
+	- Métodos utilizados
+	- Considerações
+
+Sobre o Mini Pascal 
+Sintaxe: https://www.cs.helsinki.fi/u/vihavain/k06/okk/items/minipascalsyntax.html
+
+--- Funcionalidades --------------------------
+ -> Comandos de entrada e saída
+ 	Saída: writeln, write 	
+ 	Entrada: readln
+ -> Declaração de Variáveis
+ 	Tipos: int, float, boolean, string, array*
+ -> Controle de Fluxo
+ 	Tipos: if, if else
+ -> Laços de Repetição
+ 	Tipos: for, while
+ -> Procedimentos e Funções
+
+ -> Adicionais: Análise semântica
+ 	Verificação de Tipos
+ 	Verificação de Declaração
+----------------------------------------------
+
+Interpretador
+
+$mpi code.pas
+
+code.pas      +---------------+
+------------> |               |  output
+			  | Interpretador | -------->
+input         |  Mini Pascal  |
+------------> |               |
+			  +---------------+
+
+Tradutor
+
+              +---------------+
+code.pas      |               | 
+------------> |    Tradutor   | 
+              |  Mini Pascal  |
+              |               |
+			  +---------------+
+                      | 
+                      |  code.c (sempre correto)
+                      |
+                      v 
+               gcc code.c -o program
