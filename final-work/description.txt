@@ -41,10 +41,10 @@ $mpi code.pas
 
 code.pas      +---------------+
 ------------> |               |  output
-			  | Interpretador | -------->
+              | Interpretador | -------->
 input         |  Mini Pascal  |
 ------------> |               |
-			  +---------------+
+              +---------------+
 
 Tradutor
 
@@ -53,7 +53,7 @@ code.pas      |               |
 ------------> |    Tradutor   | 
               |  Mini Pascal  |
               |               |
-			  +---------------+
+              +---------------+
                       | 
                       |  code.c (sempre correto)
                       |
