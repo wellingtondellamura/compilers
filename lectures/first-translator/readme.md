@@ -27,5 +27,7 @@ After the elimination of the left-recursion, the grammar must be like the follow
 Finally, the grammar passed through a left-factoration:
 
 > expr ::= term rest
+
 > rest ::= + term rest | - term rest
+
 > term ::= **num** | **var**
