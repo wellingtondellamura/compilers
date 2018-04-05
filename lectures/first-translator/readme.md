@@ -10,7 +10,7 @@ Input             Output
 2+3-4             23+4-
 
 
-1 The Grammar
+The Grammar
 -----------
 > expr ::= expr + term | expr -  term> | term <br/>
 > term ::= **num** | **var**
