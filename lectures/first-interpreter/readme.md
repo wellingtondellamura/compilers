@@ -1,33 +1,35 @@
-
+#EXEMPLO
 x = 10;
-2;
-2 + 2;
-x + 2;
+print 2;
+print 2 + 2;
+print x + 2;
 y = 55;
-x + y;
+print x + y;
 
-<prog> ::= <cmd>
-         | <cmd> <prog>
+#GRAMÁTICA
+<prog> ::= <cmd> <loop>
 
-<cmd>  ::= <attr> EOL
-         | <expr> EOL
+<loop> ::= <prog>
+         | EOF
 
-<attr> ::= VAR EQ <expr>
+<cmd>  ::= VAR EQ <expr> EOL
+         | PRINT <expr>
 
 <expr> ::= VAR <rest>
          | NUM <rest>
 
 <rest> ::= PLUS <expr>
-         | &
+         | EOL
 
---- TOKENS ---
+#TOKENS
 EOL  [;\n]
 VAR  [a-zA-Z]+
 PLUS +
 EQ   =
+PRINT print
 
 
---- SYMBOL TABLE ---
-# | token | lexem | value
+#SYMBOL TABLE
+N | token | lexem | value
 1 |  VAR  |   x   |  10
 2 |  VAR  |   y   |  55
