@@ -1,6 +1,7 @@
 %{
     int nchar, nword, nline;
 %}
+
 %%
 \n         { nline++; nchar++; }
 [^ \t\n]+  { nword++; nchar += yyleng; }
