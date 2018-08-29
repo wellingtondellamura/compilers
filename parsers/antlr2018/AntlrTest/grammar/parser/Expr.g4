@@ -5,7 +5,7 @@ package parser;
 }
 
 @members{
-  private int x;
+
 }
 prog:  (expr NEWLINE {System.out.println($expr.value);} )* {System.out.println("acabou");};
 expr returns [int value]
