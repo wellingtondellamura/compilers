@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.ANTLRFileStream;
+import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
@@ -19,6 +20,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import parser.ExprParser;
 import parser.ProgLexer;
 import parser.ProgParser;
+import parser.SymbolTable;
 
 /**
  *
@@ -30,22 +32,25 @@ public class Run1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        
-        CharStream stream = new ANTLRFileStream("test.src");
-        
+        String filename = null;
+        if (args.length >= 1) {
+            filename = args[0];
+        }
+        CharStream stream = null;
+        if (filename != null) {
+            stream = new ANTLRFileStream(filename);
+        } else {
+            stream = new ANTLRInputStream(System.in);
+        }
         ProgLexer lexer = new ProgLexer(stream);            //Lexer
-        
         TokenStream tokens = new CommonTokenStream(lexer);  //nextToken 
-        
         ProgParser parser = new ProgParser(tokens);         //Parser
-        
         ProgParser.ProgContext prog = parser.prog();        //Exec Parser prog
-        
-        showParseTreeFrame(prog, parser);
+//        showParseTreeFrame(prog, parser);
+//        System.out.println(SymbolTable.getInstance().dumpTable());
     }
-    
-    
-     private static void showParseTreeFrame(ParseTree tree, ProgParser parser) throws HeadlessException {
+
+    private static void showParseTreeFrame(ParseTree tree, ProgParser parser) throws HeadlessException {
         JFrame frame = new JFrame("SRC: " + tree.getText());
         JPanel panel = new JPanel();
         TreeViewer viewr = new TreeViewer(Arrays.asList(

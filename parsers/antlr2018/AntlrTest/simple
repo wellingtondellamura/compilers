@@ -1,0 +1,5 @@
+#!/bin/bash
+dir=`dirname "$0"`;
+java="java"
+jar="dist/AntlrTest.jar"
+$java -jar $dir/$jar $@
