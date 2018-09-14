@@ -11,35 +11,55 @@ package parser;
 prog : (cmd EOL)+
      ;
 
-cmd  : atrib
-     | write
-     | read
-     | expr
+cmd  : atrib            #cmdAtrib
+     | write            #cmdWrite
+     | read             #cmdRead
+     | expr             #cmdExpr
+     | ifstm            #cmdIf
      ;
-atrib: VAR '=' expr           {Util.atrib($VAR.text, $expr.value);}
+atrib: VAR '=' expr           
      ; 
-write: WRITE expr             {Util.print($expr.value);}   
-     | WRITE STR              {Util.print($STR.text);}
+write: WRITE expr       #writeExpr      
+     | WRITE STR        #writeStr
      ;
-read : READ VAR               {Util.readSymbol($VAR.text);}
+read : READ VAR               
      ;
 expr returns [Double value]
-     : e1=expr '+' e2=expr    {$value = $e1.value + $e2.value;}
-     | e1=expr '-' e2=expr    {$value = $e1.value - $e2.value;}
-     | term                   {$value = $term.value;}
+     : e1=expr '+' e2=expr    #exprPlus
+     | e1=expr '-' e2=expr    #exprMin
+     | term                   #exprTerm
      ;
 
 term returns [Double value]
-     : t1=term '*' t2=term    {$value = $t1.value * $t2.value;}
-     | t1=term '/' t2=term    {$value = $t1.value / $t2.value;}
-     | fact                   {$value = $fact.value;}
+     : t1=term '*' t2=term    #termMult
+     | t1=term '/' t2=term    #termDiv
+     | fact                   #termFact
      ;
 fact returns [Double value]
-     : NUM                    {$value = Double.parseDouble($NUM.text);}
-     | VAR                    {$value = Util.getValue($VAR.text);}
-     | '(' expr ')'           {$value = $expr.value;}
+     : NUM                    #factNum
+     | VAR                    #factVar
+     | '(' expr ')'           #factExpr
      ;
 
+ifstm: IF cond THEN block                       #ifStm
+     | IF cond THEN b1=block ELSE b2=block      #ifStmElse
+     ;
+
+cond returns [Boolean value]
+     : expr                   #condExpr 
+     | VAR RELOP expr         #confRelop
+     ;
+
+block: cmd                    #blockSingle
+     | BEGIN (cmd EOL)+ END   #blockCompose
+     ;
+
+RELOP   : '>'|'<'|'>='|'<='|'=='|'!=';
+IF      : [iI][fF];
+THEN    : [tT][hH][eE][nN];
+ELSE    : [eE][lL][sS][eE];
+END     : [eE][nN][dD];
+BEGIN   : [bB][eE][gG][iI][nN];
 STR     : '"'[a-zA-Z0-9\t ]*'"';
 READ    : [rR][eE][aA][dD];
 WRITE   : [wW][rR][iI][tT][eE];
@@ -50,6 +70,6 @@ MIN     : '-';
 DIV     : '/';
 OPEN    : '(';
 CLOSE   : ')';
-EOL     : [\r\n]+ ;
+EOL     : ';' ;
 NUM     : [0-9]+ ('.'[0-9]+)?;
-WS      : [ \t]+ -> skip;
+WS      : [ \t\r\n]+ -> skip;

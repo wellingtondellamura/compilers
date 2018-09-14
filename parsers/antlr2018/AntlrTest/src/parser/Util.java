@@ -13,6 +13,10 @@ import java.util.Scanner;
  */
 public class Util {
     
+    public static Boolean getBoolean(Double d){
+        return !(d == null || d == 0);
+    }
+    
     public static Double getValue(String symbol){
         Double v = SymbolTable.getInstance().getSymbol(symbol);
         if (v == null)
@@ -25,11 +29,8 @@ public class Util {
     }
     
     public static Double read() {
-        Scanner scan = new Scanner(System.in);
-        String value = scan.nextLine();
         try {
-            double d = Double.parseDouble(value);
-            return d;
+            return Double.parseDouble(new Scanner(System.in).nextLine());
         } catch (NumberFormatException e) {
             return null;
         }
