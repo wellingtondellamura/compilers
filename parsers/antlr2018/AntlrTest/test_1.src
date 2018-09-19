@@ -2,8 +2,8 @@ write "insira n1";
 read n1;
 write "insira n2";
 read n2;
-write "a soma eh";
-n3 = n1 + n2;
-write n3;
-if n3>10 then write n1;
+ if n1>n2 then 
+    write n1;
+ else
+    write n2;
 

@@ -76,18 +76,17 @@ public class MyProgVisitor extends ProgBaseVisitor<Object>{
 
     @Override
     public Object visitIfStm(ProgParser.IfStmContext ctx) {
-        Boolean cond = ctx.cond().value;
+        Boolean cond = (Boolean) visit(ctx.cond());
         if (cond){
             return visit(ctx.block());
-        } else {
-            return null;
-        }        
+        }
+        return null;
     }
 
     @Override
     public Object visitIfStmElse(ProgParser.IfStmElseContext ctx) {
         Boolean cond = (Boolean) visit(ctx.cond());
-        if (cond){
+        if (cond){            
             return visit(ctx.b1);
         } else {
             return visit(ctx.b2);
@@ -96,7 +95,7 @@ public class MyProgVisitor extends ProgBaseVisitor<Object>{
 
     @Override
     public Object visitCondExpr(ProgParser.CondExprContext ctx) {
-        Double value = ctx.expr().value;
+        Double value = (Double) visit(ctx.expr());
         return Util.getBoolean(value);
     }
 

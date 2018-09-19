@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Util {
     
     public static Boolean getBoolean(Double d){
-        return !(d == null || d == 0);
+        return !(d == null || d <= 0);
     }
     
     public static Double getValue(String symbol){
