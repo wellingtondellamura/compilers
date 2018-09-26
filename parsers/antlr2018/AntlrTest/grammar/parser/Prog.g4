@@ -47,7 +47,7 @@ ifstm: IF cond THEN block                       #ifStm
 
 cond returns [Boolean value]
      : expr                   #condExpr 
-     | VAR RELOP expr         #confRelop
+     | expr RELOP expr         #confRelop
      ;
 
 block: cmd                    #blockSingle

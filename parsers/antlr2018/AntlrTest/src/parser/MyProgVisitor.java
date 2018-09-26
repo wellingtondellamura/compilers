@@ -74,6 +74,7 @@ public class MyProgVisitor extends ProgBaseVisitor<Object>{
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="ifstm">
     @Override
     public Object visitIfStm(ProgParser.IfStmContext ctx) {
         Boolean cond = (Boolean) visit(ctx.cond());
@@ -82,16 +83,17 @@ public class MyProgVisitor extends ProgBaseVisitor<Object>{
         }
         return null;
     }
-
+    
     @Override
     public Object visitIfStmElse(ProgParser.IfStmElseContext ctx) {
         Boolean cond = (Boolean) visit(ctx.cond());
-        if (cond){            
+        if (cond){
             return visit(ctx.b1);
         } else {
             return visit(ctx.b2);
-        }        
+        }
     }
+//</editor-fold>
 
     @Override
     public Object visitCondExpr(ProgParser.CondExprContext ctx) {
@@ -101,7 +103,16 @@ public class MyProgVisitor extends ProgBaseVisitor<Object>{
 
     @Override
     public Object visitConfRelop(ProgParser.ConfRelopContext ctx) {
-        return super.visitConfRelop(ctx); //To change body of generated methods, choose Tools | Templates.
+        Double d1 = (Double) visit(ctx.expr(0));
+        Double d2 = (Double) visit(ctx.expr(1));
+        String relop = ctx.RELOP().getText();
+        if (relop.equals("==")) return (Object) (d1.equals(d2));
+        if (relop.equals("!=")) return (Object) !(d1.equals(d2));
+        if (relop.equals(">")) return (Object) (d1>d2);
+        if (relop.equals("<")) return (Object) (d1<d2);
+        if (relop.equals(">=")) return (Object) (d1>=d2);
+        if (relop.equals("<=")) return (Object) (d1<=d2);
+        return super.visitConfRelop(ctx);
     }
 
     

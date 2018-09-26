@@ -1,0 +1,13 @@
+Gramática
+    Ajustar a precedência das expressões
+    Ajustar a expressão regular da string
+    Adicionar o uso de comentários na sua linguagem
+    Inserir o tipo integer
+    Declarar variaveis
+
+Criar o visitor da arvore de derivação
+Adicionar regras semânticas no visitor
+
+Verificação semântica
+    Variável declarada
+    Atribuição correta do valor
