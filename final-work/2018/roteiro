@@ -1,0 +1,23 @@
+1 Gramática
+   Como será a minha linguagem?
+   Crie um arquivo .g4 e descreva os tokens e as regras de derivação
+   Pode consultar https://github.com/antlr/grammars-v4
+2 - Vou implementar em Java
+   Criar o Front-end
+      Analisadores Léxicos e Sintáticos
+         Criar um projeto com suporte ao ANTLR (ou outra ferramenta)
+         Criar o parser e o lexer com ANTLR+Gramatica.g4
+         Testar a gramática: rodar vários exemplos e analisar a árvore sintática
+      Analisador Semântico
+         Declaração de variáveis e Verificação de tipos
+           a) criar tabela de símbolos tipada  id|token|lexema|type|value
+           b) Verificar atribuição: 
+               Analisar se a variável esta na tabela de símbolos. 
+               Analisar os tipos da variável e do valor
+      Pré-processador de código: unir arquivos com #include e expandir #define
+------------------------------------------------------------------------------------
+   Criar o backend
+   1 - Interpretador
+      -> Gerar o visitor da árvore sintática. (https://github.com/wellingtondellamura/compilers-codes-samples/tree/master/parsers/antlr2018/Linguagenzinha)
+   2 - Compilador
+      -> Use LLVM (LLVM Cookbook) + (Getting Started with LLVM Core Libraries)
