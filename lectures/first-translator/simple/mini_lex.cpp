@@ -68,14 +68,14 @@ token next_token(){
     return t;
 }
 
-// int main() {
-//     input = "123+321-12+2";
-//     token lookahead = next_token();
-//     while (lookahead.type!=EOF){
-//         cout << "<"<< token_name(lookahead.type);
-//         if (lookahead.type == NUM)
-//             cout << "," << lookahead.value;
-//         cout <<">"<< endl;
-//         lookahead = next_token();
-//     }
-// }
+ int main() {
+     input = "123+321-12+2";
+     token lookahead = next_token();
+     while (lookahead.type!=EOF){
+         cout << "<"<< token_name(lookahead.type);
+         if (lookahead.type == NUM)
+             cout << "," << lookahead.value;
+         cout <<">"<< endl;
+         lookahead = next_token();
+     }
+ }
