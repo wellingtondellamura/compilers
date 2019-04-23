@@ -33,10 +33,10 @@ void rest(){
   } else if (lookahead == '+'){
     //+term rest
     match('+'); term(); print('+'); rest();
-  } else if (lookahead != EOF) {
-    //vazio
-    //syntax error?
-    error("Sem tempo irmão");
+  } else if (lookahead == EOF) {
+    //correto
+  } else {
+    //syntax 
   }
 }
 
