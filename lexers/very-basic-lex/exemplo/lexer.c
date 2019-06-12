@@ -1,16 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tokens.h"
-
-extern int yylex();
-extern int relop_att;
-extern int nline;
-extern char* yytext;
+#include "lexer_base.c"
 
 int main()
 {
 	int ntoken;
-   char* d = (char*) malloc(2);
+  char* d = (char*) malloc(2);
 	ntoken = yylex();
 	while(ntoken) {
 		switch(ntoken){

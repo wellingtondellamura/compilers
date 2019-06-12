@@ -3,7 +3,7 @@
 #define ELSE 	 3
 #define ID 		 4
 #define NUMBER	 5
-#define RELOP	10
+#define RELOP	  10
 #define OP      11
 #define CL      12
 
