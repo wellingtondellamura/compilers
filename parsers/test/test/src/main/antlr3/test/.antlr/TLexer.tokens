@@ -1,0 +1,13 @@
+KEYSER=1
+SOZE=2
+ADD=3
+SEMI=4
+ID=5
+INT=6
+COMMENT=7
+WS=8
+STRING=9
+'Keyser'=1
+'Soze'=2
+'+'=3
+';'=4
