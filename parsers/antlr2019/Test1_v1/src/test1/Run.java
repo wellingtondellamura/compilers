@@ -6,13 +6,11 @@
 package test1;
 
 import java.awt.HeadlessException;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.antlr.v4.gui.TreeViewer;
-import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.BufferedTokenStream;
 import org.antlr.v4.runtime.CharStream;
@@ -31,10 +29,7 @@ public class Run {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
-        CharStream fileStream = new ANTLRFileStream("example.in");
-        
-        
+    public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         while (s.hasNextLine()){
             String input = s.nextLine();
@@ -48,8 +43,6 @@ public class Run {
         CalcLexer lexer = new CalcLexer(input);
         TokenStream tokens = new BufferedTokenStream(lexer);
         CalcParser parser = new CalcParser(tokens);
-        // parser.addErrorListener();        
-        parser.addParseListener(new MyCalcListener());
         CalcParser.LangContext lang = parser.lang();
         return lang.value;
     }
