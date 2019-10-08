@@ -14,18 +14,7 @@ import test1.parser.CalcParser;
  */
 public class MyCalcListener extends CalcBaseListener{
 
-    @Override
-    public void enterLang(CalcParser.LangContext ctx) {
-        super.enterLang(ctx);
-    }
 
-    @Override
-    public void exitFactor(CalcParser.FactorContext ctx) {
-        super.exitFactor(ctx); 
-        System.out.println(ctx.DIGIT);
-    }
-
-    
     
     
 }

@@ -1,1 +1,10 @@
-x = 10+20+30;
+read n1 
+read n2
+read n3
+media = (n1+n2+n3)/3
+ if (media>=7) 
+  write "aprovado :)"
+ else if (media >=4)
+  write "exame :|"
+ else 
+    write "Reprovado :_("

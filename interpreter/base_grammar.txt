@@ -1,0 +1,13 @@
+progr -> (line EOL)+
+line -> read | write | atr | if 
+read -> READ VAR
+write -> WRITE STR | WRITE expr
+atr -> VAR = expr
+if -> IF (boolExpr) block |
+      IF (boolExpr) block ELSE block
+expr -> term + expr | term - expr
+term -> fact * term | fact / term | fact % term
+fact -> VAR | NUM | (expr) 
+boolExpr -> fact | !boolExpr | fact relop fact
+relop -> > | < | == | >= | <= | !=
+block -> line  | { prog }

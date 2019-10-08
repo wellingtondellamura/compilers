@@ -1,8 +1,8 @@
-UENP/CCT Compiladores 2017
+UENP/CCT Compiladores 2019
   -=- Trabalho Final -=-
-Data de Entrega: 29/11 e 01/12
+Data de Entrega:  e 01/12
 
-Um interpretador de Mini Pascal e um tradudor de Mini Pascall para C/C++
+Um tradudor para código de máquina (Usando LLVM)
 
 -> Código fonte no Github
 -> Apresentação
@@ -23,16 +23,16 @@ Sintaxe: https://www.cs.helsinki.fi/u/vihavain/k06/okk/items/minipascalsyntax.ht
  	Saída: writeln, write 	
  	Entrada: readln
  -> Declaração de Variáveis
- 	Tipos: int, float, boolean, string, array*
+ 	Tipos: int, float, boolean, string, array* (ponteiro)
  -> Controle de Fluxo
  	Tipos: if, if else
  -> Laços de Repetição
  	Tipos: for, while
  -> Procedimentos e Funções
-
- -> Adicionais: Análise semântica
+ -> Análise semântica
  	Verificação de Tipos
  	Verificação de Declaração
+
 ----------------------------------------------
 
 Interpretador

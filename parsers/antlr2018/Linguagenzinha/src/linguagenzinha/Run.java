@@ -17,8 +17,10 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import parser.MiniLangBaseListener;
+import parser.MiniLangBaseVisitor;
 import parser.MiniLangLexer;
 import parser.MiniLangParser;
+import parser.MiniLangVisitor;
 
 /**
  *
@@ -45,6 +47,8 @@ public class Run {
         //----
         MiniLangParser.ProgContext prog = parser.prog();
         showParseTreeFrame(prog, parser);
+                MiniLangVisitor v = new MiniLangBaseVisitor();
+                        v.visit(prog);
     }
 
     private static void showParseTreeFrame(ParseTree tree, MiniLangParser parser) throws HeadlessException {

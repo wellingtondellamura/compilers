@@ -6,21 +6,21 @@ import test1.Utils;
 }
 
 lang returns [Integer value] 
-     : (expr N)+                           {$value = $expr.value;}  
+     : (expr  N  )+                         
      ;
 expr returns [Integer value] 
-     : e1=expr '+' term                 {$value = $e1.value + $term.value;}
-     | term                             {$value = $term.value;}
+     : e1=expr '+' term                 
+     | term                             
      ;
 term returns [Integer value]
-     : t1=term '*' factor               {$value = $t1.value * $factor.value;}
-     | factor                           {$value = $factor.value;}
+     : t1=term '*' factor       #term1         
+     | factor                   #term2        
      ;
 
 
 factor returns [Integer value] 
-     : '(' expr ')'                     {$value = $expr.value;}
-     | DIGIT                            {$value = Integer.parseInt($DIGIT.text);}  
+     : '(' expr ')'                     
+     | DIGIT                             
      ;
 
 DIGIT : [0-9]+ ;
