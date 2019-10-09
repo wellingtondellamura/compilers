@@ -1,15 +1,20 @@
 grammar Basic;
+
+@header {
+package basicInterpreter.parser;
+}
+
 progr   : (line EOL)+
         ;
-line    : read 
-        | write 
-        | atr 
-        | ifstm
+line    : read          #lineRead
+        | write         #lineWrite
+        | atr           #lineAtr
+        | ifstm         #lineIfStm
         ; 
 read    : READ VAR
         ;
-write   : WRITE STR 
-        | WRITE expr
+write   : WRITE STR     #writeStr
+        | WRITE expr    #writeExpr
         ;
 atr     : VAR '=' expr
         ;
@@ -41,7 +46,7 @@ relop   : '>'
         | '!='
         ;
 block   : line  
-        | '{' prog '}'
+        | '{' progr '}'
         ;
 
 TRUE        : 'true';
@@ -51,7 +56,7 @@ WRITE       : 'write';
 IF          : 'if';
 ELSE        : 'else';
 STR         : '"'(~["\\\r\n])*'"';
-NUM         : [+-]?[0-9]+(\.[0-9]+)?;
+NUM         : [+-]?[0-9]+('.'[0-9]+)?;
 VAR         : [a-zA-Z][a-zA-Z0-9_]*;
 GR          : '>'; 
 LS          : '<'; 
