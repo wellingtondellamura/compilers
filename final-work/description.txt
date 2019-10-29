@@ -1,6 +1,6 @@
 UENP/CCT Compiladores 2019
   -=- Trabalho Final -=-
-Data de Entrega:  e 01/12
+Data de Entrega:  03/12 e 04/12
 
 Um tradudor para código de máquina (Usando LLVM)
 
@@ -9,14 +9,17 @@ Um tradudor para código de máquina (Usando LLVM)
 	- Descrição da Implementação
 	- Demonstração da linguagem
 	- Considerações sobre o trabalho
--> Relatório (Modelo SBC) em PDF
+-> Relatório em PDF
 	- Documentação da Linguagem
 	- Descrição da Implementação
 	- Métodos utilizados
 	- Considerações
 
-Sobre o Mini Pascal 
-Sintaxe: https://www.cs.helsinki.fi/u/vihavain/k06/okk/items/minipascalsyntax.html
+A linguagem fonte é de escolha da equipe. Pode ser utilizado  um subconjunto de uma linguagem já existente ou uma linguagem criada pela equipe.
+Exemplos: 
+   * Mini Pascal: https://www.cs.helsinki.fi/u/vihavain/k06/okk/items/minipascalsyntax.html
+   * MiniC: http://www2.ufersa.edu.br/portal/view/uploads/setores/184/AppendixA.pdf
+   * http://eli-project.sourceforge.net/pascal_html/pascal-.html
 
 --- Funcionalidades --------------------------
  -> Comandos de entrada e saída
@@ -27,35 +30,28 @@ Sintaxe: https://www.cs.helsinki.fi/u/vihavain/k06/okk/items/minipascalsyntax.ht
  -> Controle de Fluxo
  	Tipos: if, if else
  -> Laços de Repetição
- 	Tipos: for, while
+ 	Tipos: for, while, repeat until
  -> Procedimentos e Funções
  -> Análise semântica
  	Verificação de Tipos
  	Verificação de Declaração
-
+-> Uso de bibliotecas externas (Simplesmente importar código de outro arquivo)
 ----------------------------------------------
 
-Interpretador
-
-$mpi code.pas
-
-code.pas      +---------------+
-------------> |               |  output
-              | Interpretador | -------->
-input         |  Mini Pascal  |
-------------> |               |
-              +---------------+
 
 Tradutor
 
               +---------------+
 code.pas      |               | 
 ------------> |    Tradutor   | 
-              |  Mini Pascal  |
+              | Personalizado |
               |               |
               +---------------+
                       | 
-                      |  code.c (sempre correto)
+                      |  Código em LLVM (sempre correto)
                       |
                       v 
-               gcc code.c -o program
+               [    LLVM   ]
+	              |
+		      |
+        [Código de Máquina executável]
