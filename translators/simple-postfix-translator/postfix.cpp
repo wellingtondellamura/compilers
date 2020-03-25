@@ -76,7 +76,7 @@ void expr(){
     while(true){
         if (lookahead.type == SYMBOL){
             if (lookahead.value == '+'){
-                match(lookahead); int t2 = 
+                match(lookahead); 
                 term(); 
                 printf("+ ");
             }else if (lookahead.value == '-'){
