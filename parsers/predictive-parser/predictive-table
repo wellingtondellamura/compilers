@@ -1,0 +1,13 @@
+E|id|TX
+E|(|TX
+X|+|+TX
+X|)|&
+X|$|&
+T|id|FY
+T|(|FY
+Y|*|*FY
+Y|+|&
+Y|)|&
+Y|$|&
+F|id|id
+F|(|(E)

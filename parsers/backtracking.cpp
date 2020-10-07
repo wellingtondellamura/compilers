@@ -58,7 +58,6 @@ bool S(){
                 token = next_token();
                 return true;
             } else {
-
                 return false;
             }
         } else {

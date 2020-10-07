@@ -6,7 +6,7 @@
 int main()
 {
 	int ntoken;
-  char* d = (char*) malloc(2);
+    char* d = (char*) malloc(2);
 	ntoken = yylex();
 	while(ntoken) {
 		switch(ntoken){
