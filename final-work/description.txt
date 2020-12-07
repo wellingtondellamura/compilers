@@ -28,6 +28,8 @@ Exemplos:
  	Entrada: readln
  -> Declaração de Variáveis
  	Tipos: int, float, boolean, string
+ -> Operações Matemáticas
+ 	Soma, Subtração, Multiplicação, Divisão e Resto.
  -> Controle de Fluxo
  	Tipos: if, if else
  -> Laços de Repetição
