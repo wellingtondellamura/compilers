@@ -1,8 +1,9 @@
-UENP/CCT Compiladores 2019
+UENP/CCT Compiladores 
   -=- Trabalho Final -=-
-Data de Entrega:  03/12 e 04/12
 
-Um tradudor para código de máquina (Usando LLVM)
+Um tradudor para código de máquina (Usando LLVM) 
+      ----  OU  ----
+     Um interpretador
 
 -> Código fonte no Github
 -> Apresentação
@@ -27,6 +28,8 @@ Exemplos:
  	Entrada: readln
  -> Declaração de Variáveis
  	Tipos: int, float, boolean, string
+ -> Operações Matemáticas
+ 	Soma, Subtração, Multiplicação, Divisão e Resto.
  -> Controle de Fluxo
  	Tipos: if, if else
  -> Laços de Repetição
@@ -40,11 +43,10 @@ Exemplos:
 
 
 Tradutor
-
+========
               +---------------+
 code.pas      |               |
 ------------> |    Tradutor   |
-              | Personalizado |
               |               |
               +---------------+
                       |
@@ -55,3 +57,21 @@ code.pas      |               |
 	              |
 		      |
         [Código de Máquina executável]
+	
+	
+	
+	
+Interpretador
+=============
+              +---------------+
+code.pas      |               |
+------------> |               |
+Entrada do    | Interpretador |
+   Usuário    |               |
+------------> |               |
+              +---------------+
+                      |
+                      |  
+                      |
+                      v
+                    Saída
