@@ -1,10 +1,10 @@
 print "Informe x";
-re ad x;
+read x;
 print "Informe y";
-rea d y;
+read ;
 print "Informe z";
 read z;
-me dddasd  dia = (x+y+z)/3;
+media = (x+y+z)/3;
 print "Media:";
 print media;
 if (media >= 7)

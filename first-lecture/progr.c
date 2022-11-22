@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include "mylib.h"
+#include <stdio.h>
 
 int main( int argc, char *argv[] ) {
   int a = 100;
@@ -8,3 +8,5 @@ int main( int argc, char *argv[] ) {
   printf("%d\n", c);
   return 0;
 }
+
+
