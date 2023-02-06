@@ -1,0 +1,14 @@
+MULT=1
+SUM=2
+MIN=3
+DIV=4
+OPEN=5
+CLOSE=6
+NEWLINE=7
+INT=8
+'*'=1
+'+'=2
+'-'=3
+'/'=4
+'('=5
+')'=6

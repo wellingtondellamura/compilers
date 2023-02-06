@@ -1,0 +1,29 @@
+read x
+y = 20
+z = (x + y)/2
+w = 5 + 10 * 2
+write w
+*******************************************
+prog   : line X
+X      : vazio | prog
+line   : stmt EOL
+stmt   : in | out | atrib
+in     : INPUT VAR
+out    : OUTPUT VAR
+atrib  : VAR AT expr
+expr   : termY
+Y      :  + expr |  - expr | vazio 
+term   : fact | fact * term | fact / term
+fact   : NUM | VAR | OE expr CE
+
+EOL    : [\n\r]+
+INPUT  : 'read'
+OUTPUT : 'write'
+VAR    : [a-z]+
+AT     : '='
+OE     : '('
+CE     : ')'
+SUM    : '+'
+SUB    : '-'
+DIV    : '/'
+MULT   : '*'
